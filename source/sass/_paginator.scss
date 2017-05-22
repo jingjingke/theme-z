@@ -1,0 +1,25 @@
+@charset "UTF-8";
+//分页
+
+.page-paginator {
+    padding: 50px 0;
+    text-align: center;
+    .page-number ,.extend {
+        font-size:16px;
+        color: #666;
+        display: inline-block;
+        @include equal_px(40);
+        border-radius: 20px;
+        margin: 0 3px;
+        background-color: #eee;
+        @extend .tra-all;
+    }
+    a:hover {
+        color:#222;
+        background-color: #d5e3f1;
+    }
+    .current {
+        background-color: $blue;
+        color: #fff;
+    }
+}

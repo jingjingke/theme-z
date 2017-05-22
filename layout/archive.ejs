@@ -1,0 +1,24 @@
+<div class="main main-timeline">
+	<div class="timeline-warp">
+		<div class="timeline-title">
+			<img src="https://avatars3.githubusercontent.com/u/24471671?v=3&s=460" />
+			<h1>website<b>文章归档时间轴</b></h1>
+		</div>
+		<dl class="timeline-tags">
+			<dt>TAGs</dt>
+			<dd><% site.tags.each(function(tag, i){ %>
+				<h2><a href="<%= url_for(tag.path) %>"><%= tag.name %></a></h2><% if(site.tags.count()!==i+1){ %>·<% } %><% }) %>
+			</dd>
+		</dl><% page.posts.each(function(post, i){ %>
+		<% if( i===0 || (post.prev && post.prev.date.format('YYYY年MM月')!==post.date.format('YYYY年MM月') )){ %><div class="list-timeline">
+			<h3 class="time"><%= post.date.format('YYYY年MM月') %></h3>
+			<ul><% } %>	
+				<li>
+					<h4><a href="<%- url_for(post.path) %>"><%= post.title %></a></h4>
+					<p class="des"><% if (post.excerpt){ %><%- post.excerpt %><% } else { %><%- post.content.replace(/(<(?:.|\n)*?>)|\n/gm, '').substr(0, 80) %>...<% } %></p>
+					<a href="<%- url_for(post.path) %>" class="btn">查看正文</a>
+				</li><% if(page.posts.count() === i+1 || (post.next && post.next.date.format('YYYY年MM月')!==post.date.format('YYYY年MM月') )){ %>
+			</ul>
+		</div><% } %><% }) %>
+	</div>
+</div>

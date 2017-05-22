@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+//左侧菜单
+
+.menu-side {
+    position: fixed;
+    z-index: 99;
+    width: 300px;
+    height: 100%;
+    top: 0;
+    right: -300px;
+    background: #111;
+    color:#aaa ;
+    overflow: auto;
+    dl {
+        padding:80px 50px 0;
+        &:last-child { padding-bottom: 80px;}
+        dt {
+            font-size: 18px;
+            line-height: 3em;
+        }
+        dd {
+            line-height: 2em;
+        }
+        span {
+            padding: 0 2px;
+            &:before {
+                content: '(';
+            }
+            &:after{
+                content: ')';
+            }
+        }
+        a {
+            @extend .tra-all;
+            padding-right:5px;
+            color: #888;
+            display:inline-block;
+            &:hover {
+                color: #eee;
+                text-indent: 5px;
+            }
+        }
+        
+    }
+}
+
+.menu-btn {
+    position:fixed;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    @include equal_px(80);
+    cursor:pointer;
+    &:before {
+        @extend .iconfont;
+        @extend .tra-all;
+        content: $icon-caidan;
+        font-size:40px;
+        color: #333;
+        opacity: 0.7;
+    }
+    &:hover:before {
+        opacity: 1;
+    }
+}
+
+//打开时
+.menu-open {
+    &:before {
+        content: $icon-cuowu;
+        color: #fff;
+        font-size: 20px;
+    }
+}
+
+

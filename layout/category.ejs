@@ -1,0 +1,8 @@
+<div class="main main-list">
+	<div class="main-warp">
+		<div class="main-list-site">
+			<a href="<%= config.root %>">首页</a><span>»</span>栏目<span>»</span><h1><a href="<%= url_for(page.path) %>"><%= page.category %></a></h1>
+		</div>
+<%- partial('_partial/list') %>
+	</div>
+</div>

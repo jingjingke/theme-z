@@ -1,0 +1,12 @@
+		<ul class="list-common"><% page.posts.each(function(post, i){ %>
+			<li>
+				<h3><a href="<%- url_for(post.path) %>"><%= post.title %></a></h3>
+				<p class="main-list-des"><% if (post.excerpt){ %><%- post.excerpt %><% } else { %><%- post.content.replace(/(<(?:.|\n)*?>)|\n/gm, '').substr(0, 80) %><% } %>...<a href="<%- url_for(post.path) %>">『查看正文』</a></p>
+				<p class="list-common-other">
+					<span class="icon-read">1654</span>
+					<span class="icon-like">248</span>
+					<span class="icon-time"><%= post.date.format('YYYY/MM/DD') %></span>
+				</p>
+			</li><% }) %>
+		</ul>
+		<%- partial('_partial/paginator',{post: page.total}) %>

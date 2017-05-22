@@ -1,0 +1,256 @@
+@charset "UTF-8";
+
+//**************************首页list布局
+.list-index {
+    width: 60%;
+    margin: 0 auto;
+    h3 {
+        font-size: 20px;
+        line-height: 34px;
+    }
+    li {
+        position: relative;
+        padding: 70px 0 70px 180px;
+        border-bottom:1px dashed #eee;
+    }
+}
+.main-list .list-index {
+    width: 94%;
+}
+
+//相关
+.list-index-rel {
+    position: absolute;
+    left: 0;
+    top: 70px;
+    width: 150px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    text-align: center;
+    color: #999;
+    line-height: 34px;
+    .time {
+        display: block;
+        border-bottom: 1px solid #eee;
+    }
+    .tag {
+        height: 34px;
+        @extend .ellipsis;
+        a {
+            padding: 0 5px;
+        }
+    }
+}
+//描述
+.main-list-des {
+    line-height: 1.65em;
+    padding-top: 12px;
+    color: #888;
+    a {
+        @extend .ablue;
+    }
+}
+//相关计数
+.list-index-count {
+    padding-top: 10px;
+    height: 24px;
+    line-height: 24px;
+    color: #999;
+    span {
+        &:before {
+            @extend .iconfont;
+            @extend .tra-all;
+            color: #ddd;
+            position: relative;
+            top: 1px;
+            padding-right: 3px;
+        }
+    }
+    .icon-read {
+        padding-right: 20px;
+        &:before {
+            top: 3px;
+            padding-right: 1px;
+        }
+    }
+}
+
+//**************************时间轴list布局
+.list-timeline {
+    margin-top: 50px;
+    overflow: hidden;
+    position: relative;
+    padding-left: 160px;
+    z-index: 2;
+    .time {
+        position:absolute;
+        top: 0;
+        left: 0;
+        font-size: 14px;
+        font-weight: normal;
+        color: $blue;
+        width: 103px;
+        line-height:24px;
+        &:before {
+            float: right;
+            content: '';
+            @include equal_px(16);
+            border-radius: 20px;
+            border:4px solid #fff;
+            background: $blue;
+        }
+    }
+    ul {
+        margin-top: -20px;
+    }
+    li {
+        float: left;
+        width: 42%;
+        padding: 20px 3%;
+        margin: 20px 0 0;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius:10px;
+        @extend .tra-all;
+        &:hover {
+            background: #fffae8;
+            border: 1px solid #fffae8;
+        }
+        &:nth-child(odd) {
+            margin-right: 3%;
+        }
+    }
+    h4 {
+        font-size: 16px;
+        height: 1.5em;
+        line-height:1.5em;
+        font-weight: normal;
+        @extend .ellipsis;
+    }
+    .des {
+        padding-top:8px;
+        color: #999;
+        line-height: 1.5em;
+        height: 3em;
+        display:-webkit-box;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+    }
+    .btn {
+        margin-top: 10px;
+        display: block;
+        width: 90px;
+        text-align: center;
+        line-height: 32px;
+        color: #fff;
+        background-color: #d4e2f6;
+        border-radius: 5px;
+        @extend .tra-all;
+        &:hover {
+            background-color: $blue;
+        }
+    }
+}
+//浮动时间轴
+.flex-timeline {
+    position: fixed;
+    z-index: 8;
+    top: 100px;
+    right: 100px;
+    width: 100px;
+    border-left: 2px solid #ddd;
+    dl {
+        padding-left: 20px;
+        margin-top: 15px;
+        color:#aaa; 
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+    dd,dt {
+        height: 14px;
+        line-height: 14px;
+        position: relative;
+        &:before {
+            content: '';
+            display:block;
+            @include equal_px(14);
+            border-radius: 7px;
+            position:absolute;
+            left: -28px;
+            top: 0;
+            background: #aaa;
+        }
+    }
+    dt+dd {
+        margin-top: 12px;
+    }
+    dd {
+        display: none;
+        margin-top: 8px;
+        &:before {
+            @include equal_px(10);
+            top: 2px;
+            left: -26px;
+        }
+    }
+    .dlon {
+        dt {
+            color: $blue;
+            &:before {
+                background-color: $blue;
+            }
+        }
+        dd {
+            display: block;
+        }
+    }
+    .ddon {
+        color: $blue;
+        &:before {
+            background-color: $blue;
+        }
+    }
+}
+
+
+
+//分类TAG列表--
+.list-common {
+    h3 {
+        font-size: 18px;
+    }
+    li {
+        position: relative;
+        padding: 40px 26% 40px 30px;
+        background: #fff;
+        border-bottom:1px dashed #eee;
+    }
+    .main-list-des {
+        min-height: 3.3em;
+    }
+}
+.list-common-other {
+    position: absolute;
+    top:48px;
+    right: 6%;
+    color: #999;
+    span {
+        display: block;
+        line-height: 24px;
+        &:before {
+            @extend .iconfont;
+            color: #ddd;
+            display: inline-block;
+            width:32px;
+        }
+    }
+    .icon-like:before {
+        text-indent:3px;
+    }
+    .icon-time:before {
+        text-indent: 3px;
+    }
+}

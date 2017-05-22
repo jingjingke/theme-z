@@ -1,0 +1,50 @@
+@charset "UTF-8";
+//底部
+.footer {
+    position:absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 100px 0;
+    background-color: #222;
+    .copyright {
+        font-size: 12px;
+        line-height: 20px;
+        text-transform:uppercase;
+    }
+    .links {
+        float: right;
+        a {
+            @include equal_px(40);
+            display: inline-block;
+            color: #222;
+            margin-left: 3px;
+            position: relative;
+            &:before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                font-size: 40px;
+                @extend .iconfont;
+                @extend .tra-all;
+                color: #999;
+                background-color: #222;
+            }
+            &:hover:before {
+                color: #eee;
+            }
+        }
+        .sina:before {
+            content: $icon-Git;
+        }
+        .git:before {
+            content: $icon-xinlang;
+        }
+        .code:before {
+            content:$icon-erweima;
+        }
+    }
+}
+.footer-warp {
+    width: 60%;
+    margin: 0 auto;
+}

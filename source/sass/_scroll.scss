@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+//滚动条样式美化
+//整体
+::-webkit-scrollbar {
+    width: 10px;
+    height:10px;
+}
+//轨道
+::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background:#eee
+}
+//滑块
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #333;
+}
+//滑块效果
+::-webkit-scrollbar-thumb:hover {
+    border-radius: 5px;
+    background: #555;
+}

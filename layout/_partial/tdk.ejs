@@ -1,0 +1,21 @@
+<% if(is_home()){ %>
+<title><%- theme.title  %></title>
+<meta name="keywords" content="<%- theme.title  %>,<%- theme.keywords %>" />
+<meta name="description" content="<%- theme.description %>" />
+<% }else if(is_archive()){ %>
+<title><%- theme.archive_title %>-<%- theme.title  %></title>	
+<meta name="keywords" content="<%- theme.archive_keywords  %>" />
+<meta name="description" content="<%- theme.archive_description %>" />
+<% }else if(is_category()){ %>
+<title><%- page.category %>-<%- theme.title  %></title>	
+<meta name="keywords" content="<%- page.category  %>" />
+<meta name="description" content="<%- theme.title  %>中关于<%- page.category %>栏目的列表" />
+<% }else if(is_tag()){ %>
+<title><%- page.tag %>-TAG</title>	
+<meta name="keywords" content="<%- page.tag  %>,tag标签" />
+<meta name="description" content="tag标签为<%- page.tag %>的文章列表" />
+<% }else if(is_post()){ %>
+<title><%- page.title %>-<%- theme.title  %></title>	
+<meta name="keywords" content="<%- page.title %><% page.tags.each(function(tag,index){ %>,<%= tag.name %><% }) %>" />
+<meta name="description" content="<% if (page.excerpt){ %><%- page.excerpt %><% } else { %><%- page.content.replace(/(<(?:.|\n)*?>)|\n/gm, '').substr(0, 165) %><% } %>" />
+<% } %>

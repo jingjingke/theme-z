@@ -1,0 +1,23 @@
+<div class="main main-list">
+	<div class="main-warp">
+		<div class="main-list-site">
+			<a href="<%= config.root %>">首页</a><span>»</span><% if (page.categories && page.categories.length){ %><% page.categories.each(function(cate, index) { %><% if(index===0){ %><a href="<%= url_for(cate.path) %>"><%= cate.name %></a><span>»</span><% } %><% }) %><% } %>
+			<h1><a href="<%= url_for(page.path) %>"><%= page.title %></a></h1>
+		</div>
+		<div class="main-detail">
+			<div class="detail-tips">
+				<span class="time"><%= page.date.format('YYYY/MM/DD') %></span>
+				<p class="tags"><% if (page.tags && page.tags.length){ %>
+					<% count = page.tags.length %><% page.tags.each(function(tag, index) { %><a href='<%= url_for(tag.path) %>'><%= tag.name %></a><% if (count !== index+1) { %>,<% } %><% }) %><% } %>
+				</p>
+			</div>
+			<div class="atricle-content">
+				<%- page.content %>
+			</div>
+			<div class="atricle-updown">
+				<p><span>«</span><% if(page.prev){ %><a href='<%- url_for(page.prev.path) %>'><%- page.prev.title %></a><% }else{ %><span>无</span><% } %></p>
+				<p><% if(page.next){ %><a href='<%- url_for(page.next.path) %>'><%- page.next.title %></a><% }else{ %><span>无</span><% } %><span>«</span></p>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+	<ul class="list-index"><% page.posts.each(function(post, i){ %>
+		<li>
+			<h3><a  href="<%- url_for(post.path) %>"><%= post.title %></a></h3>
+			<div class="list-index-rel">
+				<span class="time"><%= post.date.format('YYYY-MM-DD') %></span>
+				<p class="tag"><% post.tags.each(function(tag,i){ %><a href="<%= url_for(tag.path) %>"><%= tag.name %></a><% if(post.tags.count() !== i+1){ %>,<% } %><% }) %></p>
+			</div>
+			<p class="main-list-des"><% if (post.excerpt){ %><%- post.excerpt %><% } else { %><%- post.content.replace(/(<(?:.|\n)*?>)|\n/gm, '').substr(0, 165) %><% } %>...<a href="<%- url_for(post.path) %>">『查看正文』</a></p>
+		</li><% }) %>
+	</ul>
+	<%- partial('_partial/paginator',{post: page.total}) %>

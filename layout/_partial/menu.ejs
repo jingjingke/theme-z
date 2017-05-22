@@ -1,0 +1,19 @@
+<div class="menu-side">
+	<div class="menu-btn"></div>
+	<dl>
+		<dt>MENU</dt>
+		<dd><a href="<%- config.root %>">首页</a></dd><% if(!theme.menu_arc){ %>
+		<dd><a href="<%= url_for('archives') %>">归档</a></dd><% } %><% site.categories.each(function(cate, i){ %>
+		<dd><a href='<%= url_for(cate.path) %>'><%= cate.name %></a></dd><% }) %>
+	</dl><% if(theme.menu_tag){ %>
+	<dl>
+		<dt>TAG ' s</dt><% site.tags.each(function(tag, i){ %>
+		<dd><a href="<%= url_for(tag.path) %>"><%= tag.name %></a></a><span><%= tag.length %></span></dd><% }) %>
+	</dl><% } %><% if(theme.menu_arc){ %>
+	<dl>
+		<dt><a href="<%= url_for('archives') %>">归档</a></dt>
+		<dd>
+			<%- list_archives({show_count: theme.show_count, type: theme.archive_type , format : theme.format}) %>
+		</dd>
+	</dl><% } %>
+</div>

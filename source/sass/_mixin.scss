@@ -1,0 +1,102 @@
+@charset "UTF-8";
+//匹配rem计算
+@function rem($val){ @return ($val/75)+rem; }
+//长宽相等
+@mixin equal_px($size){
+    width: $size+px;
+    height: $size+px;
+    text-align: center;
+    line-height: $size+px;
+}
+@mixin equal_rem($size){
+    width:rem($size);
+    height: rem($size);
+    line-height: rem($size);
+}
+
+$gray:#9c9fab;
+$blue:#2a70d0;
+
+
+@font-face {font-family: "iconfont";
+  src: url('../fonts/iconfont.eot?t=1494467609281'); /* IE9*/
+  src: url('../fonts/iconfont.eot?t=1494467609281#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/iconfont.woff?t=1494467609281') format('woff'), /* chrome, firefox */
+  url('../fonts/iconfont.ttf?t=1494467609281') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/iconfont.svg?t=1494467609281#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+$icon-shouye: "\e65a";      //首页-位置
+
+$icon-xihuan:"\e699";       //喜欢
+$icon-rili:"\e634";         //日历
+$icon-yuedu: "\e71b";       //阅读
+
+$icon-Git: "\e61c";         //git
+$icon-xinlang: "\e61d";     //新浪
+$icon-erweima: "\e63b";     //二维码
+
+$icon-caidan: "\e694";      //菜单
+$icon-cuowu:"\e606";        //错误
+
+//图标
+.icon-read:before {
+    font-size: 22px;
+    content: $icon-yuedu;
+}
+.icon-like:before {
+    font-size: 16px;
+    content: $icon-xihuan;
+}
+.icon-time:before {
+    font-size: 16px;
+    content: $icon-rili;
+}
+
+
+.before {
+    display: block;
+}
+
+//底边
+.bor-bot {
+    border-bottom: 1px solid #eee;
+}
+//四边颜色蓝色
+.bor-blue {
+    color: $blue;
+    border: 1px solid $blue;
+    background: #fff;
+}
+
+//动画
+.tra-all {
+    transition: all 0.3s;
+}
+
+.t-shadow {
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
+}
+
+//字体带省略号
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+//链接蓝色--纯文字
+.ablue {
+    color: $blue;
+    @extend .tra-all;
+    &:hover {
+        color: #333;
+        text-decoration: underline;
+    }
+}

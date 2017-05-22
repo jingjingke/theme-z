@@ -1,0 +1,148 @@
+@charset "UTF-8";
+.container {
+    min-height: 100%;
+    overflow: hidden;
+    &:after {
+        display: block;
+        content: '';
+        height: 240px;
+    }
+}
+//普通
+.main {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    margin-top: 60%;
+    padding-bottom: 80px;
+}
+.main-warp {
+    position: relative;
+    width: 60%;
+    margin: 0 auto;
+}
+.main-list {
+    margin-top: 0;
+    border-top: 4px solid #222;
+}
+//时间轴
+.main-timeline {
+//  background:rgba(255,255,255,0.8);
+    margin: 0;
+    padding-top: 80px;
+    padding-bottom: 0;
+    background: #fcfdff;
+}
+.timeline-warp {
+    @extend .main-warp;
+    padding-bottom: 150px;
+    &:after {
+        display: block;
+        content: '';
+        width: 3px;
+        height: 100%;
+        background: #649eee;
+        position: absolute;
+        left: 90px;
+        top: 0;
+    }
+}
+.timeline-title {
+    position: relative;
+    z-index: 1;
+    height: 130px;
+    img {
+        float: left;
+        @include equal_px(120);
+        border-radius: 65px;
+        border: 5px solid #fff;
+        box-shadow: 0 0 20px 5px rgba(42,112,208,0.2);
+        background: #fff;
+        margin: 0 20px 0 30px;
+        transition: all 1s;
+        &:hover {
+            transform: rotate(360deg);
+        }
+    }
+    h1 {
+        font-weight: normal;
+        font-size: 24px;
+        color: #999;
+        padding-top: 36px;
+        text-transform:uppercase;
+    }
+    b {
+        font-size: 18px;
+        color: #555;
+        display: block;
+        line-height: 1.8em;
+    }
+}
+
+.timeline-tags {
+    position: relative;
+    z-index: 2;
+    padding: 70px 0 0 160px;
+    dt {
+        position:absolute;
+        left: 50px;
+        top: 52px;
+        @include equal_px(68);
+        border-radius: 40px;
+        color: #fff;
+        background-color:$blue ;
+        border:5px solid #fff;
+        box-shadow: 0 0 0 6px #80b1f4 inset;
+    }
+    dd {
+        display: inline-block;
+        background: #f2f6fd;
+        border-radius: 6px;
+        font-size: 16px;
+        line-height: 1.8em;
+        padding: 8px 16px;
+        color: $blue;
+    }
+    h2 {
+        display: inline;
+        font-size: 16px;
+        font-weight: normal;
+    }
+    a {
+        @extend .ablue;
+        padding: 0 6px;
+    }
+}
+
+//当前位置
+.main-list-site {
+//  position: absolute;
+//  text-indent:30px;
+//  width: 100%;
+//  top: rem(-140);
+    line-height: rem(60);
+    padding: rem(40) 0 rem(40) 30px;
+    color: #222;
+    font-size: 18px;
+    h1 {
+        display:inline-block;
+        font-size: 18px;
+        text-indent: 0;
+    }
+    span {
+        color: #999;
+        padding: 0 12px;
+    }
+    a:hover {
+        color: #000;
+    }
+    &:before {
+        position: relative;
+        top: 3px;
+        margin-right: 10px;
+        font-size: 24px;
+        @extend .iconfont;
+        content: $icon-shouye;
+        color: #000;
+    }
+}
