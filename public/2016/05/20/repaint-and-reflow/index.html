@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>页面重构应注意的重绘和渲染-hexo-blog</title>	
+<meta name="keywords" content="页面重构应注意的重绘和渲染,性能" />
+<meta name="description" content="前端开发人员在页面重构中应该慎重考虑DOM操作，合理优化DOM的重绘（repaint）与重渲染（reflow）可以减轻客户浏览器的压力以及提高页面的性能，值得去学习交流。网上看了一遍文章，感觉不错，所以拿过来分享一下，中间有些东西说得并不细，所以也加了一些东西。什么是repaint和reflow？首先我们要知道一个页面由两部分组" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+</head>
+<body>
+<div class="container">
+<div class="main main-list">
+	<div class="main-warp">
+		<div class="main-list-site">
+			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/public/2016/05/20/repaint-and-reflow/">页面重构应注意的重绘和渲染</a></h1>
+		</div>
+		<div class="main-detail">
+			<div class="detail-tips">
+				<span class="time">2016/05/20</span>
+				<p class="tags">
+					<a href='/public/tags/性能/'>性能</a>
+				</p>
+			</div>
+			<div class="atricle-content">
+				<p>前端开发人员在页面重构中应该慎重考虑DOM操作，合理优化DOM的重绘（repaint）与重渲染（reflow）可以减轻客户浏览器的压力以及提高页面的性能，值得去学习交流。<img src="/public/img/1-160612110S3250.jpg" alt="页面重构应注意的重绘和渲染配图">网上看了一遍文章，感觉不错，所以拿过来分享一下，中间有些东西说得并不细，所以也加了一些东西。</p>
+<h2 id="什么是repaint和reflow？"><a href="#什么是repaint和reflow？" class="headerlink" title="什么是repaint和reflow？"></a>什么是repaint和reflow？</h2><p>首先我们要知道一个页面由两部分组成：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DOM       描述该页面的结构</div><div class="line">render    描述DOM节点(nodes)在页面上如何呈现</div></pre></td></tr></table></figure></p>
+<p>当DOM元素的属性发生变化(如color)时，浏览器会通知render重新描绘相应的元素，此过程称为repaint。</p>
+<p>如果该次变化涉及元素布局(如width)，浏览器则抛弃原有属性，重新计算并把结果传递给render以重新描绘页面元素，此过程称为reflow。</p>
+<p>这两个过程是很耗费浏览器性能的，从IE系列和Chrome渲染页面速度上的差距即可看出渲染引擎计算对应值和呈现并不一定高效，而每次对元素的操作都会发生repaints或reflow，因此编写DOM交互时如果不注意就会导致页面性能低下。</p>
+<p>页面渲染的过程如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. 解析HTML代码并生成一个DOM树。</div><div class="line"></div><div class="line">2. 解析CSS文件，顺序为：浏览器默认样式-&gt;自定义样式-&gt;页面内的样式。</div><div class="line"></div><div class="line">3. 生成一个渲染树（render tree）。这个渲染树和DOM树的不同之处在于，它是受样式影响的。它不包括那些不可见的节点。</div><div class="line"></div><div class="line">4. 当渲染树生成之后，浏览器就会在屏幕上&quot;画&quot;出所有渲染树中的节点。</div></pre></td></tr></table></figure></p>
+<p>PS:repaint和reflow，从名字就可以知道它们都有重新（再一次）的动作在里面，为什么会重新执行一次（N次）呢？如何减少、避免触发或只局部进行操作这个应该是我们学习的方向。</p>
+<h2 id="什么情况下会触发浏览器的repaint-reflow"><a href="#什么情况下会触发浏览器的repaint-reflow" class="headerlink" title="什么情况下会触发浏览器的repaint/reflow?"></a>什么情况下会触发浏览器的repaint/reflow?</h2><p>除了页面在首次加载时必然要经历该过程之外，还有以下行为会触发这个行为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. DOM元素的添加、修改（内容）、删除( Reflow + Repaint)</div><div class="line">2. 仅修改DOM元素的字体颜色（只有Repaint，因为不需要调整布局）</div><div class="line">3. 应用新的样式或者修改任何影响元素外观的属性</div><div class="line">4. Resize浏览器窗口、滚动页面</div><div class="line">5. 读取元素的某些属性（offsetLeft、offsetTop、offsetHeight、offsetWidth、 scrollTop/Left/Width/Height、clientTop/Left/Width/Height、 getComputedStyle()、currentStyle(in IE))</div></pre></td></tr></table></figure></p>
+<h2 id="怎么优化？"><a href="#怎么优化？" class="headerlink" title="怎么优化？"></a>怎么优化？</h2><p>（1）<strong>避免在document上直接进行频繁的DOM操作</strong>，如果确实需要可以采用off-document的方式进行，具体的方法包括但不完全包括以下几种：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. 先将元素从document中删除，完成修改后再把元素放回原来的位置</div><div class="line">2. 将元素的display设置为&quot;none&quot;，完成修改后再把display修改为原来的值</div><div class="line">3. 如果需要创建多个DOM节点，可以使用DocumentFragment创建完后一次性的加入document</div></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var fragment = document.createDocumentFragment();</div><div class="line">fragment.appendChild(document.createTextNode(&apos;keenboy test 111&apos;));</div><div class="line">fragment.appendChild(document.createElement(&apos;br&apos;));</div><div class="line">fragment.appendChild(document.createTextNode(&apos;keenboy test 222&apos;));</div><div class="line">document.body.appendChild(fragment);</div></pre></td></tr></table></figure></p>
+<p>（2）<strong>集中修改样式</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. 尽可能少的修改元素style上的属性</div><div class="line">2. 尽量通过修改className来修改样式</div><div class="line">3. 通过cssText属性来设置样式值</div></pre></td></tr></table></figure>
+<p>例如：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">element.style.width=&quot;80px&quot;;               //reflow</div><div class="line">element.style.height=&quot;90px&quot;;              //reflow</div><div class="line">element.style.border=&quot;solid 1px red&quot;;     //reflow</div><div class="line">//以上就产生多次reflow，调用的越多产生就越多</div><div class="line">element.style.cssText=&quot;width:80px;height:80px;border:solid 1px red;&quot;;     //reflow</div></pre></td></tr></table></figure></p>
+<p>（3）<strong>缓存Layout属性值</strong></p>
+<p>对于Layout属性中非引用类型的值（数字型），如果需要多次访问则可以在一次访问时先存储到局部变量中，之后都使用局部变量，这样可以避免每次读取属性时造成浏览器的渲染。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var left=elem.offsetLeft;      //多次使用left也就产生一次reflow</div></pre></td></tr></table></figure>
+<p>（4）<strong>设置元素的position为absolute或fixed</strong></p>
+<p>在元素的position为static和relative时，元素处于DOM树结构当中，当对元素的某个操作需要重新渲染时，浏览器会渲染整个页 面。</p>
+<p>将元素的position设置为absolute和fixed可以使元素从DOM树结构中脱离出来独立的存在，而浏览器在需要渲染时只需要渲染该元素 以及位于该元素下方的元素，从而在某种程度上缩短浏览器渲染时间，这在当今越来越多的Javascript动画方面尤其值得考虑。</p>
+<p>（5）<strong>权衡速度的平滑</strong></p>
+<p>比如实现一个动画，以1个像素为单位移动这样最平滑，但reflow就会过于频繁，CPU很快就会被完全占用。如果以3个像素为单位移动就会好很多。</p>
+<p>（6）<strong>不要用tables布局</strong></p>
+<p>不要用tables布局的另一个原因就是tables中某个元素一旦触发reflow就会导致table里所有的其它元素 reflow。在适合用table的场合，可以设置table-layout为auto或fixed，这样可以让table一行一行的渲染，这种做法也是为了限制reflow的影响范围</p>
+<p>（7）<strong>不要在css里面写表达式</strong></p>
+<p>很多情况下都会触发reflow，如果css里有expression，每次都会重新计算一遍</p>
+<p>原文参考来源<a href="http://www.blueidea.com/tech/web/2011/8365.asp" target="_blank" rel="external">点击查看</a></p>
+
+			</div>
+			<div class="atricle-updown">
+				<p><span>«</span><a href='/public/2016/08/09/app-can-call-js-method/'>安卓APP中可以调用JS方法</a></p>
+				<p><a href='/public/2016/05/12/css-lines-overflow-ellipses/'>CSS多行文本溢出显示省略号</a><span>«</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="footer">
+	<div class="footer-warp">
+		<p class="links">
+			<a href="http://www.sina.com.cn/" target="_blank" class="sina">新浪</a>
+			<a href="https://github.com/" target="_blank" class="git">git</a>
+		</p>
+		<p class="copyright">Powered by hexo<br />© 2017  , Content By ziy All Rights Reserved.</p>
+	</div>
+</div>
+<div class="menu-side">
+	<div class="menu-btn"></div>
+	<dl>
+		<dt>MENU</dt>
+		<dd><a href="/public/">首页</a></dd>
+		<dd><a href="/public/archives">归档</a></dd>
+		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+	</dl>
+	<dl>
+		<dt>TAG ' s</dt>
+		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+	</dl>
+</div>
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/pages.js"></script>
+</body>
+</html>

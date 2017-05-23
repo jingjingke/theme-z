@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>CSS伪类实现文字颜色对半-hexo-blog</title>	
+<meta name="keywords" content="CSS伪类实现文字颜色对半,CSS" />
+<meta name="description" content="CSS不仅是一种技术，也是一种艺术，在这个领域中你有更大的空间和可能性来发挥自己的奇思妙想，今天用CSS给文字上一半的颜色，才发现CSS伪类真是无处不在。CSS实现文字颜色对半，其实说到底还是将伪类显示一半，上色后放到原来的字上面，从正面看到的效果就是这个文字被分了两半，一半是上色后的，一半是原来的颜色。仔细看一下代码，感觉还是" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+</head>
+<body>
+<div class="container">
+<div class="main main-list">
+	<div class="main-warp">
+		<div class="main-list-site">
+			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/public/2016/11/18/css-text-half/">CSS伪类实现文字颜色对半</a></h1>
+		</div>
+		<div class="main-detail">
+			<div class="detail-tips">
+				<span class="time">2016/11/18</span>
+				<p class="tags">
+					<a href='/public/tags/CSS/'>CSS</a>
+				</p>
+			</div>
+			<div class="atricle-content">
+				<p>CSS不仅是一种技术，也是一种艺术，在这个领域中你有更大的空间和可能性来发挥自己的奇思妙想，今天用CSS给文字上一半的颜色，才发现CSS伪类真是无处不在。<img src="/public/img/1-16111QI32NT.png" alt="CSS伪类实现文字颜色对半效果图">CSS实现文字颜色对半，其实说到底还是将伪类显示一半，上色后放到原来的字上面，从正面看到的效果就是这个文字被分了两半，一半是上色后的，一半是原来的颜色。仔细看一下代码，感觉还是很容易理解的！<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>CSS伪类实现文字颜色对半<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line">    <span class="selector-tag">body</span> &#123; <span class="attribute">margin</span>: <span class="number">0</span>; <span class="attribute">padding</span>: <span class="number">0</span>; <span class="attribute">padding-top</span>: <span class="number">200px</span>; <span class="attribute">text-align</span>: center;&#125;</div><div class="line">    <span class="selector-tag">span</span> &#123;</div><div class="line">      <span class="attribute">font-size</span>: <span class="number">120px</span>;</div><div class="line">      <span class="attribute">display</span>: inline-block; <span class="comment">/*需要这种布局*/</span></div><div class="line">      <span class="attribute">position</span>: relative;</div><div class="line">    &#125;</div><div class="line">    <span class="selector-tag">span</span><span class="selector-pseudo">:after</span> &#123;</div><div class="line">      <span class="attribute">display</span>: block;</div><div class="line">      <span class="attribute">content</span>:<span class="built_in">attr</span>(data-content);</div><div class="line">      <span class="attribute">position</span>: absolute;</div><div class="line">      <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">      <span class="attribute">z-index</span>: <span class="number">2</span>;</div><div class="line">      <span class="attribute">color</span>:dodgerblue;</div><div class="line">      <span class="attribute">width</span>: <span class="number">50%</span>;</div><div class="line">      <span class="attribute">overflow</span>: hidden;</div><div class="line">    &#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>美<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>丽<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>人<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>生<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.jingjingke.com/res/js/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    $(<span class="string">'span'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      $(<span class="keyword">this</span>).attr(<span class="string">'data-content'</span>,$(<span class="keyword">this</span>).text());</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这个是简化后的代码，<a href="http://www.webhek.com/css-half-character/" target="_blank" rel="external">点击原文链接</a></p>
+<p>因为原文可能讲得比较多一些，我自己做的时候就能省则省了。兼容没怎么考虑。另外还有上两种颜色的，通过用after和before两个伪类，来做。<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>CSS伪类实现文字三色<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line">    <span class="selector-tag">body</span> &#123; <span class="attribute">margin</span>: <span class="number">0</span>; <span class="attribute">padding</span>: <span class="number">0</span>; <span class="attribute">padding-top</span>: <span class="number">200px</span>; <span class="attribute">text-align</span>: center;&#125;</div><div class="line">    <span class="selector-tag">span</span> &#123;</div><div class="line">      <span class="attribute">font-size</span>: <span class="number">120px</span>;</div><div class="line">      <span class="attribute">display</span>: inline-block; <span class="comment">/*需要这种布局*/</span></div><div class="line">      <span class="attribute">position</span>: relative;</div><div class="line">      <span class="attribute">color</span>:orangered ;</div><div class="line">    &#125;</div><div class="line">    <span class="selector-tag">span</span><span class="selector-pseudo">:after</span>,<span class="selector-tag">span</span><span class="selector-pseudo">:before</span> &#123;</div><div class="line">      <span class="attribute">display</span>: block;</div><div class="line">      <span class="attribute">content</span>:<span class="built_in">attr</span>(data-content);</div><div class="line">      <span class="attribute">position</span>: absolute;</div><div class="line">      <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">      <span class="attribute">overflow</span>: hidden;</div><div class="line">    &#125;</div><div class="line">    <span class="selector-tag">span</span><span class="selector-pseudo">:after</span> &#123;</div><div class="line">      <span class="attribute">height</span>: <span class="number">40%</span>;</div><div class="line">      <span class="attribute">z-index</span>: <span class="number">3</span>;</div><div class="line">      <span class="attribute">color</span>:dodgerblue;</div><div class="line">    &#125;</div><div class="line">    <span class="selector-tag">span</span><span class="selector-pseudo">:before</span> &#123;</div><div class="line">      <span class="attribute">height</span>: <span class="number">70%</span>;</div><div class="line">      <span class="attribute">z-index</span>: <span class="number">2</span>;</div><div class="line">      <span class="attribute">color</span>: black;</div><div class="line">    &#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>美<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>丽<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>人<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>生<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.jingjingke.com/res/js/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    $(<span class="string">'span'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      $(<span class="keyword">this</span>).attr(<span class="string">'data-content'</span>,$(<span class="keyword">this</span>).text());</div><div class="line">    &#125;);</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这是我整理的三种颜色了，跟文字颜色对半对比一下，差不多应该能理解了~</p>
+
+			</div>
+			<div class="atricle-updown">
+				<p><span>«</span><a href='/public/2017/03/06/manage-vue-global-components/'>如何更方便的管理vue全局组件</a></p>
+				<p><a href='/public/2016/10/13/js-amount-conversion-chinese/'>JS转换金额之数字到中文的转化</a><span>«</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="footer">
+	<div class="footer-warp">
+		<p class="links">
+			<a href="http://www.sina.com.cn/" target="_blank" class="sina">新浪</a>
+			<a href="https://github.com/" target="_blank" class="git">git</a>
+		</p>
+		<p class="copyright">Powered by hexo<br />© 2017  , Content By ziy All Rights Reserved.</p>
+	</div>
+</div>
+<div class="menu-side">
+	<div class="menu-btn"></div>
+	<dl>
+		<dt>MENU</dt>
+		<dd><a href="/public/">首页</a></dd>
+		<dd><a href="/public/archives">归档</a></dd>
+		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+	</dl>
+	<dl>
+		<dt>TAG ' s</dt>
+		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+	</dl>
+</div>
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/pages.js"></script>
+</body>
+</html>

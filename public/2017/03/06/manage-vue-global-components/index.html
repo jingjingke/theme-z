@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>如何更方便的管理vue全局组件-hexo-blog</title>	
+<meta name="keywords" content="如何更方便的管理vue全局组件,VUE" />
+<meta name="description" content="刚开始我们会在入口文件main.js中注册VUE全局组件，但是多人合作时频繁修改入口文件的话可能会造成代码冲突，不利于代码维护。所以我们需要单独去建一个JS去保存组件并注册到全局。原来在入口文件main.js/app.js中，这样注册全局组件：//获取位置import topCom from "./components/top"" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+</head>
+<body>
+<div class="container">
+<div class="main main-list">
+	<div class="main-warp">
+		<div class="main-list-site">
+			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/public/2017/03/06/manage-vue-global-components/">如何更方便的管理vue全局组件</a></h1>
+		</div>
+		<div class="main-detail">
+			<div class="detail-tips">
+				<span class="time">2017/03/06</span>
+				<p class="tags">
+					<a href='/public/tags/VUE/'>VUE</a>
+				</p>
+			</div>
+			<div class="atricle-content">
+				<p>刚开始我们会在入口文件main.js中注册VUE全局组件，但是多人合作时频繁修改入口文件的话可能会造成代码冲突，不利于代码维护。所以我们需要单独去建一个JS去保存组件并注册到全局。</p>
+<h2 id="原来"><a href="#原来" class="headerlink" title="原来"></a>原来</h2><p>在入口文件main.js/app.js中，这样注册全局组件：<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">//获取位置</span></div><div class="line"><span class="keyword">import</span> topCom <span class="keyword">from</span> <span class="string">"./components/top"</span>;</div><div class="line"><span class="comment">//注册到全局</span></div><div class="line">Vue.component(<span class="string">'topCom'</span>, topCom);</div></pre></td></tr></table></figure></p>
+<h2 id="现在"><a href="#现在" class="headerlink" title="现在"></a>现在</h2><p>我们可以直接在components文件夹下，新建一个index.js，然后为它添加内容：<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">//获取位置</span></div><div class="line"><span class="keyword">import</span> topCom <span class="keyword">from</span> <span class="string">"./top"</span>;</div><div class="line"><span class="keyword">import</span> footCom <span class="keyword">from</span> <span class="string">"./foot"</span>;</div><div class="line"><span class="comment">//模块化</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    topCom,</div><div class="line">    footCom</div><div class="line">｝</div></pre></td></tr></table></figure></p>
+<p>以后components下如果有新增的全局注册可以只修改这个index.js就可以了。同时别忘记最一步，去全局注册一下(main.js/app.js)：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">//通过components下的index.js文件导入组件</span></div><div class="line"><span class="keyword">import</span> components <span class="keyword">from</span> <span class="string">'./components/'</span>;</div><div class="line"><span class="comment">//对导入的组件进行全局组件注册</span></div><div class="line"><span class="built_in">Object</span>.keys(components).forEach(<span class="function">(<span class="params">key</span>)=&gt;</span>&#123;</div><div class="line">    Vue.component(key,components[key])</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这样以后就可以方便的去全局组件进行管理了。而在所有页面中，我们可以使用全局组件topCom和footCom，无须再去分别注册了~</p>
+
+			</div>
+			<div class="atricle-updown">
+				<p><span>«</span><a href='/public/2017/03/09/vue2-uses-axios-instead-resource/'>vue2使用axios代替vue-resource</a></p>
+				<p><a href='/public/2016/11/18/css-text-half/'>CSS伪类实现文字颜色对半</a><span>«</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="footer">
+	<div class="footer-warp">
+		<p class="links">
+			<a href="http://www.sina.com.cn/" target="_blank" class="sina">新浪</a>
+			<a href="https://github.com/" target="_blank" class="git">git</a>
+		</p>
+		<p class="copyright">Powered by hexo<br />© 2017  , Content By ziy All Rights Reserved.</p>
+	</div>
+</div>
+<div class="menu-side">
+	<div class="menu-btn"></div>
+	<dl>
+		<dt>MENU</dt>
+		<dd><a href="/public/">首页</a></dd>
+		<dd><a href="/public/archives">归档</a></dd>
+		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+	</dl>
+	<dl>
+		<dt>TAG ' s</dt>
+		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+	</dl>
+</div>
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/pages.js"></script>
+</body>
+</html>
