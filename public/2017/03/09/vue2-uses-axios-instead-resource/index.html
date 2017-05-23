@@ -8,27 +8,27 @@
 <meta name="description" content="终于将vue-resource替换成axios了，其中像application/x-www-form-urlencoded发送的头信息以及返回的response结果这两点都需要注意一下。其实axios官方也有说明。因为我在vue-resource中使用了Vue.http.options.emulateJSON = true;这种" />
 
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<link rel="stylesheet" href="/public/css/style.css">
-<link rel="stylesheet" href="/public/css/hl-github.css">
-<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+<link rel="stylesheet" href="/theme-z/public/css/style.css">
+<link rel="stylesheet" href="/theme-z/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/theme-z/public/img/favicon.ico" type="image/ico">
 </head>
 <body>
 <div class="container">
 <div class="main main-list">
 	<div class="main-warp">
 		<div class="main-list-site">
-			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
-			<h1><a href="/public/2017/03/09/vue2-uses-axios-instead-resource/">vue2使用axios代替vue-resource</a></h1>
+			<a href="/theme-z/public/">首页</a><span>»</span><a href="/theme-z/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/theme-z/public/2017/03/09/vue2-uses-axios-instead-resource/">vue2使用axios代替vue-resource</a></h1>
 		</div>
 		<div class="main-detail">
 			<div class="detail-tips">
 				<span class="time">2017/03/09</span>
 				<p class="tags">
-					<a href='/public/tags/VUE/'>VUE</a>
+					<a href='/theme-z/public/tags/VUE/'>VUE</a>
 				</p>
 			</div>
 			<div class="atricle-content">
-				<p>终于将vue-resource替换成axios了，其中像application/x-www-form-urlencoded发送的头信息以及返回的response结果这两点都需要注意一下。<img src="/public/img/1-1F310102229205.png" alt="vue2使用axios代替vue-resource说明图"><br>其实<a href="https://github.com/mzabriskie/axios" target="_blank" rel="external">axios官方</a>也有说明。因为我在vue-resource中使用了<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.http.options.emulateJSON = <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
+				<p>终于将vue-resource替换成axios了，其中像application/x-www-form-urlencoded发送的头信息以及返回的response结果这两点都需要注意一下。<img src="/theme-z/public/img/1-1F310102229205.png" alt="vue2使用axios代替vue-resource说明图"><br>其实<a href="https://github.com/mzabriskie/axios" target="_blank" rel="external">axios官方</a>也有说明。因为我在vue-resource中使用了<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.http.options.emulateJSON = <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
 <p>这种请求在发送头信息时会将Content-Type改为application/x-www-form-urlencoded，而若使用axios的话，为了达到这种效果作者提供了两种方法。</p>
 <p>第一种使用new URLSearchParams()，但是这种方法兼容有点不好。所以我使用的是第二种方法，使用node_modules文件夹中的qs模块。因为我之前已经将ajax请求稍微封装了一下（下面说的代码基本都是在ajax.js中添加的），所以改动其实真不多。</p>
 <p>安装axios模块就不说了，先将axios和qs引用进来。<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</div><div class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span>;</div></pre></td></tr></table></figure></p>
@@ -40,8 +40,8 @@
 
 			</div>
 			<div class="atricle-updown">
-				<p><span>«</span><a href='/public/2017/03/21/exit-the-login-flow-chart/'>没有退出接口的页面实现退出功能流程图</a></p>
-				<p><a href='/public/2017/03/06/manage-vue-global-components/'>如何更方便的管理vue全局组件</a><span>«</span></p>
+				<p><span>«</span><a href='/theme-z/public/2017/03/21/exit-the-login-flow-chart/'>没有退出接口的页面实现退出功能流程图</a></p>
+				<p><a href='/theme-z/public/2017/03/06/manage-vue-global-components/'>如何更方便的管理vue全局组件</a><span>«</span></p>
 			</div>
 		</div>
 	</div>
@@ -60,21 +60,21 @@
 	<div class="menu-btn"></div>
 	<dl>
 		<dt>MENU</dt>
-		<dd><a href="/public/">首页</a></dd>
-		<dd><a href="/public/archives">归档</a></dd>
-		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+		<dd><a href="/theme-z/public/">首页</a></dd>
+		<dd><a href="/theme-z/public/archives">归档</a></dd>
+		<dd><a href='/theme-z/public/categories/前端笔记/'>前端笔记</a></dd>
 	</dl>
 	<dl>
 		<dt>TAG ' s</dt>
-		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
-		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
-		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
-		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
-		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
-		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/theme-z/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/theme-z/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/theme-z/public/tags/性能/">性能</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/PS/">PS</a></a><span>1</span></dd>
 	</dl>
 </div>
-<script src="/public/js/jquery.min.js"></script>
-<script src="/public/js/pages.js"></script>
+<script src="/theme-z/public/js/jquery.min.js"></script>
+<script src="/theme-z/public/js/pages.js"></script>
 </body>
 </html>

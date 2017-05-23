@@ -8,23 +8,23 @@
 <meta name="description" content="其实最近在做的APP项目中已经在开始重整代码，大部分图标也都打算使用iconfont里面的字体图标来完成，不过前期的页面还在更新当中，一时没办法放弃这种背景图片background-position百分比的方法，在做尝试的时候发现了这种格式速记的方法，比较省事的样子~满足条件的格子有哪些？background-position百" />
 
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<link rel="stylesheet" href="/public/css/style.css">
-<link rel="stylesheet" href="/public/css/hl-github.css">
-<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+<link rel="stylesheet" href="/theme-z/public/css/style.css">
+<link rel="stylesheet" href="/theme-z/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/theme-z/public/img/favicon.ico" type="image/ico">
 </head>
 <body>
 <div class="container">
 <div class="main main-list">
 	<div class="main-warp">
 		<div class="main-list-site">
-			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
-			<h1><a href="/public/2016/08/30/background-position-percentage/">background-position百分比格子速记法</a></h1>
+			<a href="/theme-z/public/">首页</a><span>»</span><a href="/theme-z/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/theme-z/public/2016/08/30/background-position-percentage/">background-position百分比格子速记法</a></h1>
 		</div>
 		<div class="main-detail">
 			<div class="detail-tips">
 				<span class="time">2016/08/30</span>
 				<p class="tags">
-					<a href='/public/tags/CSS/'>CSS</a>
+					<a href='/theme-z/public/tags/CSS/'>CSS</a>
 				</p>
 			</div>
 			<div class="atricle-content">
@@ -33,15 +33,15 @@
 <h3 id="一维格子百分比计算"><a href="#一维格子百分比计算" class="headerlink" title="一维格子百分比计算"></a>一维格子百分比计算</h3><p>1格比容简单这里就不说了，先从<strong>2x1的格子</strong>来说吧，假设图片默认里面是横排可以放两个图标（横向尺寸对半分），即2格，首先background-position竖向的值即可以写0%也可以写100%，而横向则有区别，第一个图标应是0%，第二个图标应是100%。这时的background-size值是200%，而你实际需要的尺寸则跟百分比是没有关系的。再说<strong>5x1的格子</strong>，即横向平分了5份，从左向右只说position百分比为：0%、25%、50%、75%、100%这五个值。background-size的值为500%;</p>
 <p>如果不明白的话不要捉急，后面我会画个图说明一下~</p>
 <h3 id="二维格子百分比计算"><a href="#二维格子百分比计算" class="headerlink" title="二维格子百分比计算"></a>二维格子百分比计算</h3><p>再来说3*2这种格子，假设图片横向平分3竖向平分2，即这张图可以存6个小标，这时background-size值是300%，而从左向右从上至下，background-position的值则为：0% 0%、50% 0%、100% 0%、100% 0%、100% 50%、100% 100%，现在有没有发现什么规律呢？</p>
-<p>开始上图了：<img src="/public/img/1-160S01A420530.png" alt="background-position百分比格子速记法效果图1">因为background-size的值的计算是实际展示区域的尺寸是没有关系，只跟这个格子与格子总长有关，所以这个值可以说一目了然，上图也有列出来，比如8格的，size的值就是800%。</p>
+<p>开始上图了：<img src="/theme-z/public/img/1-160S01A420530.png" alt="background-position百分比格子速记法效果图1">因为background-size的值的计算是实际展示区域的尺寸是没有关系，只跟这个格子与格子总长有关，所以这个值可以说一目了然，上图也有列出来，比如8格的，size的值就是800%。</p>
 <p>而且图中也有另外贴出每个格子相差的值，我自己感觉这个就是百分比格子计算的根本。</p>
 <h3 id="异变"><a href="#异变" class="headerlink" title="异变"></a>异变</h3><p>当然实际应用中可能会出现较特殊情况，例如本来规划的图标就是100像素x100像素，但是突然有个效果图中图标尺寸需要的是160x160，在不影响之前写好的代码和图标的情况下，有两种方法可以解决：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. 图片整体放大1.6倍</div><div class="line">2. 尝试让这个图标占两格或多格(推荐)</div></pre></td></tr></table></figure></p>
-<p>方法1是最省事的，无需怎么计算，直接放大背景图将160px存放在单元格，但是不好的地方就是图片放大后占用的体积也会变大，反而不美。而方法2则需要用到下面说的较复杂（合并多格）的情况，但是在前期说的那些格子中并不是所有的格子都能满足条件，目前可以使用2格、4格、6格、9格、21格，继续看下面这张图吧~<img src="/public/img/1-160S01A340309.png" alt="background-position百分比格子速记法效果图2">写到这里就差不多了~不过我自己思考的可能会有一些缺陷没有发现的地方，欢迎童鞋讨论与指正~</p>
+<p>方法1是最省事的，无需怎么计算，直接放大背景图将160px存放在单元格，但是不好的地方就是图片放大后占用的体积也会变大，反而不美。而方法2则需要用到下面说的较复杂（合并多格）的情况，但是在前期说的那些格子中并不是所有的格子都能满足条件，目前可以使用2格、4格、6格、9格、21格，继续看下面这张图吧~<img src="/theme-z/public/img/1-160S01A340309.png" alt="background-position百分比格子速记法效果图2">写到这里就差不多了~不过我自己思考的可能会有一些缺陷没有发现的地方，欢迎童鞋讨论与指正~</p>
 
 			</div>
 			<div class="atricle-updown">
-				<p><span>«</span><a href='/public/2016/10/13/js-amount-conversion-chinese/'>JS转换金额之数字到中文的转化</a></p>
-				<p><a href='/public/2016/08/09/app-can-call-js-method/'>安卓APP中可以调用JS方法</a><span>«</span></p>
+				<p><span>«</span><a href='/theme-z/public/2016/10/13/js-amount-conversion-chinese/'>JS转换金额之数字到中文的转化</a></p>
+				<p><a href='/theme-z/public/2016/08/09/app-can-call-js-method/'>安卓APP中可以调用JS方法</a><span>«</span></p>
 			</div>
 		</div>
 	</div>
@@ -60,21 +60,21 @@
 	<div class="menu-btn"></div>
 	<dl>
 		<dt>MENU</dt>
-		<dd><a href="/public/">首页</a></dd>
-		<dd><a href="/public/archives">归档</a></dd>
-		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+		<dd><a href="/theme-z/public/">首页</a></dd>
+		<dd><a href="/theme-z/public/archives">归档</a></dd>
+		<dd><a href='/theme-z/public/categories/前端笔记/'>前端笔记</a></dd>
 	</dl>
 	<dl>
 		<dt>TAG ' s</dt>
-		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
-		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
-		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
-		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
-		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
-		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/theme-z/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/theme-z/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/theme-z/public/tags/性能/">性能</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/PS/">PS</a></a><span>1</span></dd>
 	</dl>
 </div>
-<script src="/public/js/jquery.min.js"></script>
-<script src="/public/js/pages.js"></script>
+<script src="/theme-z/public/js/jquery.min.js"></script>
+<script src="/theme-z/public/js/pages.js"></script>
 </body>
 </html>

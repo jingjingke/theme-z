@@ -8,27 +8,27 @@
 <meta name="description" content="前端开发人员在页面重构中应该慎重考虑DOM操作，合理优化DOM的重绘（repaint）与重渲染（reflow）可以减轻客户浏览器的压力以及提高页面的性能，值得去学习交流。网上看了一遍文章，感觉不错，所以拿过来分享一下，中间有些东西说得并不细，所以也加了一些东西。什么是repaint和reflow？首先我们要知道一个页面由两部分组" />
 
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<link rel="stylesheet" href="/public/css/style.css">
-<link rel="stylesheet" href="/public/css/hl-github.css">
-<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+<link rel="stylesheet" href="/theme-z/public/css/style.css">
+<link rel="stylesheet" href="/theme-z/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/theme-z/public/img/favicon.ico" type="image/ico">
 </head>
 <body>
 <div class="container">
 <div class="main main-list">
 	<div class="main-warp">
 		<div class="main-list-site">
-			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
-			<h1><a href="/public/2016/05/20/repaint-and-reflow/">页面重构应注意的重绘和渲染</a></h1>
+			<a href="/theme-z/public/">首页</a><span>»</span><a href="/theme-z/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/theme-z/public/2016/05/20/repaint-and-reflow/">页面重构应注意的重绘和渲染</a></h1>
 		</div>
 		<div class="main-detail">
 			<div class="detail-tips">
 				<span class="time">2016/05/20</span>
 				<p class="tags">
-					<a href='/public/tags/性能/'>性能</a>
+					<a href='/theme-z/public/tags/性能/'>性能</a>
 				</p>
 			</div>
 			<div class="atricle-content">
-				<p>前端开发人员在页面重构中应该慎重考虑DOM操作，合理优化DOM的重绘（repaint）与重渲染（reflow）可以减轻客户浏览器的压力以及提高页面的性能，值得去学习交流。<img src="/public/img/1-160612110S3250.jpg" alt="页面重构应注意的重绘和渲染配图">网上看了一遍文章，感觉不错，所以拿过来分享一下，中间有些东西说得并不细，所以也加了一些东西。</p>
+				<p>前端开发人员在页面重构中应该慎重考虑DOM操作，合理优化DOM的重绘（repaint）与重渲染（reflow）可以减轻客户浏览器的压力以及提高页面的性能，值得去学习交流。<img src="/theme-z/public/img/1-160612110S3250.jpg" alt="页面重构应注意的重绘和渲染配图">网上看了一遍文章，感觉不错，所以拿过来分享一下，中间有些东西说得并不细，所以也加了一些东西。</p>
 <h2 id="什么是repaint和reflow？"><a href="#什么是repaint和reflow？" class="headerlink" title="什么是repaint和reflow？"></a>什么是repaint和reflow？</h2><p>首先我们要知道一个页面由两部分组成：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DOM       描述该页面的结构</div><div class="line">render    描述DOM节点(nodes)在页面上如何呈现</div></pre></td></tr></table></figure></p>
 <p>当DOM元素的属性发生变化(如color)时，浏览器会通知render重新描绘相应的元素，此过程称为repaint。</p>
 <p>如果该次变化涉及元素布局(如width)，浏览器则抛弃原有属性，重新计算并把结果传递给render以重新描绘页面元素，此过程称为reflow。</p>
@@ -57,8 +57,8 @@
 
 			</div>
 			<div class="atricle-updown">
-				<p><span>«</span><a href='/public/2016/08/09/app-can-call-js-method/'>安卓APP中可以调用JS方法</a></p>
-				<p><a href='/public/2016/05/12/css-lines-overflow-ellipses/'>CSS多行文本溢出显示省略号</a><span>«</span></p>
+				<p><span>«</span><a href='/theme-z/public/2016/08/09/app-can-call-js-method/'>安卓APP中可以调用JS方法</a></p>
+				<p><a href='/theme-z/public/2016/05/12/css-lines-overflow-ellipses/'>CSS多行文本溢出显示省略号</a><span>«</span></p>
 			</div>
 		</div>
 	</div>
@@ -77,21 +77,21 @@
 	<div class="menu-btn"></div>
 	<dl>
 		<dt>MENU</dt>
-		<dd><a href="/public/">首页</a></dd>
-		<dd><a href="/public/archives">归档</a></dd>
-		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+		<dd><a href="/theme-z/public/">首页</a></dd>
+		<dd><a href="/theme-z/public/archives">归档</a></dd>
+		<dd><a href='/theme-z/public/categories/前端笔记/'>前端笔记</a></dd>
 	</dl>
 	<dl>
 		<dt>TAG ' s</dt>
-		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
-		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
-		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
-		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
-		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
-		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/theme-z/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/theme-z/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/theme-z/public/tags/性能/">性能</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/PS/">PS</a></a><span>1</span></dd>
 	</dl>
 </div>
-<script src="/public/js/jquery.min.js"></script>
-<script src="/public/js/pages.js"></script>
+<script src="/theme-z/public/js/jquery.min.js"></script>
+<script src="/theme-z/public/js/pages.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ categories:
 tags:
 - CSS
 ---
-纯CSS实现让footer固定在底部，当内容不够一屏时固定在屏幕底部，当内容超出一屏时则跟随在内容底部。![纯CSS让footer固定在页面底部效果图](/public/img/1-1F5021I6400-L.gif)前段时间做react-demo的时候，遇到过这个CSS-Sticky-Footer的问题，当时因为底部并不是在body下面的，所以没有做起来，只用了响应式的让它浮在底部，而在小屏幕时让它跟随在内容下边。这次正好群里面有小伙伴也在弄这个，所以我就把demo做了一下，纯CSS实现（兼容IE比较差，用了伪类和min-height）。具体代码如下：
+纯CSS实现让footer固定在底部，当内容不够一屏时固定在屏幕底部，当内容超出一屏时则跟随在内容底部。![纯CSS让footer固定在页面底部效果图](/theme-z/public/img/1-1F5021I6400-L.gif)前段时间做react-demo的时候，遇到过这个CSS-Sticky-Footer的问题，当时因为底部并不是在body下面的，所以没有做起来，只用了响应式的让它浮在底部，而在小屏幕时让它跟随在内容下边。这次正好群里面有小伙伴也在弄这个，所以我就把demo做了一下，纯CSS实现（兼容IE比较差，用了伪类和min-height）。具体代码如下：
 ```html
 <!doctype html>
 <html>

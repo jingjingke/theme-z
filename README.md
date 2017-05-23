@@ -1,2 +1,4 @@
-# view分支 #
-view分支仅为主分支提供页面浏览效果。虽是一个hexo完整项目，但并不能保证该分支下theme-z主题为最新版本，所以无需clone。
+# master分支 #
+该分支仅提供页面浏览效果。是一个hexo完整项目，如里只需要下载主题的话，需要去默认分支theme。
+
+效果预览，[点击这里](https://jingjingke.github.io/theme-z/public/)

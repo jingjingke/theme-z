@@ -6,7 +6,7 @@ categories:
 tags:
 - VUE
 ---
-终于将vue-resource替换成axios了，其中像application/x-www-form-urlencoded发送的头信息以及返回的response结果这两点都需要注意一下。![vue2使用axios代替vue-resource说明图](/public/img/1-1F310102229205.png)
+终于将vue-resource替换成axios了，其中像application/x-www-form-urlencoded发送的头信息以及返回的response结果这两点都需要注意一下。![vue2使用axios代替vue-resource说明图](/theme-z/public/img/1-1F310102229205.png)
 其实[axios官方](https://github.com/mzabriskie/axios)也有说明。因为我在vue-resource中使用了
 ```js
 Vue.http.options.emulateJSON = true;

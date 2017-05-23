@@ -8,27 +8,27 @@
 <meta name="description" content="看到有小伙伴想将json数组按照level来分类转成树型嵌套的结构，正好有空，所以我也动手做了做，还好没让人失望。看效果图其实不难发现，原始数据由普通的结构转到树型嵌套结构，经过了两步。1. 按照等级分成一堆一堆。2. 从下向上（排除顶级），查到它们所在的父节点，而将顶级组合在一起就是一个全新的树了。实现的代码具体如下：&lt;" />
 
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<link rel="stylesheet" href="/public/css/style.css">
-<link rel="stylesheet" href="/public/css/hl-github.css">
-<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+<link rel="stylesheet" href="/theme-z/public/css/style.css">
+<link rel="stylesheet" href="/theme-z/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/theme-z/public/img/favicon.ico" type="image/ico">
 </head>
 <body>
 <div class="container">
 <div class="main main-list">
 	<div class="main-warp">
 		<div class="main-list-site">
-			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
-			<h1><a href="/public/2017/05/03/json-array-tree-nested/">json数组转树型嵌套结构</a></h1>
+			<a href="/theme-z/public/">首页</a><span>»</span><a href="/theme-z/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/theme-z/public/2017/05/03/json-array-tree-nested/">json数组转树型嵌套结构</a></h1>
 		</div>
 		<div class="main-detail">
 			<div class="detail-tips">
 				<span class="time">2017/05/03</span>
 				<p class="tags">
-					<a href='/public/tags/JS/'>JS</a>
+					<a href='/theme-z/public/tags/JS/'>JS</a>
 				</p>
 			</div>
 			<div class="atricle-content">
-				<p>看到有小伙伴想将json数组按照level来分类转成树型嵌套的结构，正好有空，所以我也动手做了做，还好没让人失望。<img src="/public/img/1-1F5031625400-L.gif" alt="json数组转树型嵌套结构效果图">看效果图其实不难发现，原始数据由普通的结构转到树型嵌套结构，经过了两步。<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. 按照等级分成一堆一堆。</div><div class="line">2. 从下向上（排除顶级），查到它们所在的父节点，而将顶级组合在一起就是一个全新的树了。</div></pre></td></tr></table></figure></p>
+				<p>看到有小伙伴想将json数组按照level来分类转成树型嵌套的结构，正好有空，所以我也动手做了做，还好没让人失望。<img src="/theme-z/public/img/1-1F5031625400-L.gif" alt="json数组转树型嵌套结构效果图">看效果图其实不难发现，原始数据由普通的结构转到树型嵌套结构，经过了两步。<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. 按照等级分成一堆一堆。</div><div class="line">2. 从下向上（排除顶级），查到它们所在的父节点，而将顶级组合在一起就是一个全新的树了。</div></pre></td></tr></table></figure></p>
 <p>实现的代码具体如下：<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;!doctype html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>json数组转树型嵌套结构<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">      <span class="comment">//原始数据，根据level分5位数代表1级，10位数代表2级，以此类推</span></div><div class="line">      <span class="keyword">var</span> dataJson = [</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"*a"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"00001"</span>&#125;,</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"**a"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"0000100035"</span>&#125;,</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"**a"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"0000100036"</span>&#125;,</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"***a"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"000010003500020"</span>&#125;,</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"***a"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"000010003500021"</span>&#125;,</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"***a"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"000010003500022"</span>&#125;,</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"*c"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"00003"</span>&#125;,</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"**c"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"0000300037"</span>&#125;,</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"****a"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"00001000350002100001"</span>&#125;,</div><div class="line">        &#123;<span class="string">"name"</span>:<span class="string">"*b"</span>,<span class="string">"id"</span>:<span class="string">"1"</span>,<span class="string">"level"</span>:<span class="string">"00002"</span>&#125;</div><div class="line">      ];</div><div class="line">      </div><div class="line">      <span class="comment">//先按等级分类(同时整理原始json)</span></div><div class="line">      <span class="keyword">var</span> myArr = [] , newJson = [];</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; dataJson.length; i++) &#123;</div><div class="line">        <span class="comment">//将dataJson的索引按照等级分入myArr</span></div><div class="line">        <span class="keyword">var</span> thisIndex = dataJson[i].level.length / <span class="number">5</span> - <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span>(myArr[thisIndex] === <span class="literal">undefined</span>) &#123;</div><div class="line">          myArr[thisIndex] = []</div><div class="line">        &#125;</div><div class="line">        myArr[thisIndex].push(i)</div><div class="line">        <span class="comment">//重整对象属性(只保留name和level)</span></div><div class="line">        <span class="keyword">var</span> newObj=&#123;</div><div class="line">          <span class="attr">name</span>  :dataJson[i].name,</div><div class="line">          <span class="attr">level</span>  :dataJson[i].level</div><div class="line">        &#125;</div><div class="line">        newJson.push(newObj)</div><div class="line">      &#125;</div><div class="line"> </div><div class="line">      <span class="comment">//组成梯形</span></div><div class="line">      <span class="keyword">var</span> ladderArr = [];</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> i = myArr.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</div><div class="line">        <span class="keyword">switch</span>(i) &#123;</div><div class="line">          <span class="keyword">case</span> <span class="number">0</span>:</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> l = <span class="number">0</span>; l &lt; myArr[i].length; l++) &#123;</div><div class="line">              ladderArr.push(newJson[myArr[i][l]])</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; myArr[i].length; j++) &#123;</div><div class="line">              <span class="keyword">var</span> str = dataJson[myArr[i][j]].level.substr(<span class="number">0</span>, i * <span class="number">5</span>);</div><div class="line">              <span class="keyword">for</span>(<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; myArr[i - <span class="number">1</span>].length; k++) &#123;</div><div class="line">                <span class="keyword">if</span>(dataJson[myArr[i - <span class="number">1</span>][k]].level === str) &#123;</div><div class="line">                  <span class="keyword">if</span>(newJson[myArr[i - <span class="number">1</span>][k]].list === <span class="literal">undefined</span>) newJson[myArr[i - <span class="number">1</span>][k]].list = [];</div><div class="line">                  newJson[myArr[i - <span class="number">1</span>][k]].list.push(newJson[myArr[i][j]])</div><div class="line">                &#125;</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      <span class="comment">//打印结果</span></div><div class="line">      <span class="built_in">console</span>.log(ladderArr)</div><div class="line">      <span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(ladderArr))</div><div class="line"> </div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>需要注意：</p>
 <ul>
@@ -40,7 +40,7 @@
 			</div>
 			<div class="atricle-updown">
 				<p><span>«</span><span>无</span></p>
-				<p><a href='/public/2017/05/02/css-sticky-footer/'>纯CSS让footer固定在页面底部</a><span>«</span></p>
+				<p><a href='/theme-z/public/2017/05/02/css-sticky-footer/'>纯CSS让footer固定在页面底部</a><span>«</span></p>
 			</div>
 		</div>
 	</div>
@@ -59,21 +59,21 @@
 	<div class="menu-btn"></div>
 	<dl>
 		<dt>MENU</dt>
-		<dd><a href="/public/">首页</a></dd>
-		<dd><a href="/public/archives">归档</a></dd>
-		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+		<dd><a href="/theme-z/public/">首页</a></dd>
+		<dd><a href="/theme-z/public/archives">归档</a></dd>
+		<dd><a href='/theme-z/public/categories/前端笔记/'>前端笔记</a></dd>
 	</dl>
 	<dl>
 		<dt>TAG ' s</dt>
-		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
-		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
-		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
-		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
-		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
-		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/theme-z/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/theme-z/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/theme-z/public/tags/性能/">性能</a></a><span>1</span></dd>
+		<dd><a href="/theme-z/public/tags/PS/">PS</a></a><span>1</span></dd>
 	</dl>
 </div>
-<script src="/public/js/jquery.min.js"></script>
-<script src="/public/js/pages.js"></script>
+<script src="/theme-z/public/js/jquery.min.js"></script>
+<script src="/theme-z/public/js/pages.js"></script>
 </body>
 </html>

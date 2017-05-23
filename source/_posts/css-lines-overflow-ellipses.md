@@ -6,7 +6,7 @@ categories:
 tags:
 - CSS
 ---
-大部分童鞋都知道CSS单行文本溢出显示省略号的方法是text-overflow:ellipsis;，那么多行文本溢出显示省略号的方法是什么呢？了解一下吧~![CSS多行文本溢出显示省略号配图](/public/img/1-1605121UGT35.jpg)
+大部分童鞋都知道CSS单行文本溢出显示省略号的方法是text-overflow:ellipsis;，那么多行文本溢出显示省略号的方法是什么呢？了解一下吧~![CSS多行文本溢出显示省略号配图](/theme-z/public/img/1-1605121UGT35.jpg)
 ## 单行文本溢出 ##
 利用CSS控制当单行文溢出时显示省略号，前提是元素需要是块元素。代码如下：
 ```CSS
