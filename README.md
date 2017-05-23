@@ -1,5 +1,7 @@
-# theme-z #
-仿TKL做的一个hexo主题模板，比较简单，意在学习
+# theme-z默认分支 #
+仿TKL做的一个hexo主题模板，比较简单，意在学习。另外需要注意master分支为预览效果用的一个完整hexo项目，当前分支（theme）才是真实需要拷贝的分支。
+
+效果预览：[https://jingjingke.github.io/theme-z/public/](https://jingjingke.github.io/theme-z/public/)
 
 ## 安装 ##
 在安装hexo之后，去到themes文件夹下，执行
@@ -8,7 +10,7 @@ git clone https://github.com/jingjingke/theme-z.git
 ```
 之后将根目录下面的`_config.yml`中主题修改为`theme-z`，就完成了。
 
-而同时你应该也发现了，`theme-z`文件夹下也有一个`_config.yml`的文件。这个就是涉及到该主题的相关配置信息。在此我只记录了右侧滚动条显示TAG与归档的开关配置，以及网站TDK（TDK引用的是模板的配置，没并且用根配置）。
+而同时你应该也发现了，`theme-z`文件夹下也有一个`_config.yml`的文件。这个就是涉及到该主题的相关配置信息。在此我只记录了右侧滚动条显示TAG与归档的开关配置，以及网站TDK（TDK引用的是模板的配置，没并且用根配置）和归档中需要用到的头像。
 
 ## 结构 ##
 主题中的文件包含两大块，`source`和`layout`,前者主要负责网站ui部分，后者才是模板的关键，这里主要说明的是`layout`，ui里面有scss和静态页面demo,看例子就能明白，所以不会太做说明。
@@ -32,7 +34,7 @@ header.ejs        //暂时只首页使用header
 list.ejs          //列表样式1（首页，分类，TAG通用）
 list2.ejs         //列表样式2(暂时不用)
 menu.ejs          //右侧菜单
-paginator.ejs     //分赠
+paginator.ejs     //分页
 tdk.ejs           //tdk网站标题说明关键字
 ```
 一个网站模板大致就是这些了。另外UI的部分需要注意的是网站图标，是在`source > img > favicon.ico`。

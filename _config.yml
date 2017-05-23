@@ -21,3 +21,6 @@ description: '这是一个分享我生活与前端学习的空间，欢迎访问
 archive_title: '文章归档时间轴'
 archive_keywords: '文章归档,时间轴,时间归档'
 archive_description: '全部文章按照时间轴进行归档,更直观的展示,方便查看。'
+
+#归档页面使用的头像[要使用位于source下的img中的图片也可直接使用http网址]
+archive_login: '/img/login.png'
