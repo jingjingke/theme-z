@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>vue2使用axios代替vue-resource-hexo-blog</title>	
+<meta name="keywords" content="vue2使用axios代替vue-resource,VUE" />
+<meta name="description" content="终于将vue-resource替换成axios了，其中像application/x-www-form-urlencoded发送的头信息以及返回的response结果这两点都需要注意一下。其实axios官方也有说明。因为我在vue-resource中使用了Vue.http.options.emulateJSON = true;这种" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+</head>
+<body>
+<div class="container">
+<div class="main main-list">
+	<div class="main-warp">
+		<div class="main-list-site">
+			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/public/2017/03/09/vue2-uses-axios-instead-resource/">vue2使用axios代替vue-resource</a></h1>
+		</div>
+		<div class="main-detail">
+			<div class="detail-tips">
+				<span class="time">2017/03/09</span>
+				<p class="tags">
+					<a href='/public/tags/VUE/'>VUE</a>
+				</p>
+			</div>
+			<div class="atricle-content">
+				<p>终于将vue-resource替换成axios了，其中像application/x-www-form-urlencoded发送的头信息以及返回的response结果这两点都需要注意一下。<img src="/public/img/1-1F310102229205.png" alt="vue2使用axios代替vue-resource说明图"><br>其实<a href="https://github.com/mzabriskie/axios" target="_blank" rel="external">axios官方</a>也有说明。因为我在vue-resource中使用了<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Vue.http.options.emulateJSON = <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
+<p>这种请求在发送头信息时会将Content-Type改为application/x-www-form-urlencoded，而若使用axios的话，为了达到这种效果作者提供了两种方法。</p>
+<p>第一种使用new URLSearchParams()，但是这种方法兼容有点不好。所以我使用的是第二种方法，使用node_modules文件夹中的qs模块。因为我之前已经将ajax请求稍微封装了一下（下面说的代码基本都是在ajax.js中添加的），所以改动其实真不多。</p>
+<p>安装axios模块就不说了，先将axios和qs引用进来。<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</div><div class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span>;</div></pre></td></tr></table></figure></p>
+<p>然后将发送的请求参数外面使用qs.stringify进行包裹。<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line">qs.stringify( data )</div></pre></td></tr></table></figure></p>
+<p>最后将接受的结果，提取正确的字段。（在vue-resource中正文件是response.body，而在axios中正文则是response.data。这个需要注意一下）<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(response.data)     <span class="comment">//这个打印出来的就是返回的结果</span></div></pre></td></tr></table></figure></p>
+<p>其中response中则有一些请求状态等等相关的参数，我这边很少用到，所以就不列出来了。只需上面三步，就完成了vue-resource到axios的转换。同时解决了axios发送x-www-form-urlencoded的需求，特别方便吧~</p>
+<p>另外贴上我整个ajax.js文件，中间用到了加密解密，可以无视一下。<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</div><div class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</div><div class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span>;</div><div class="line"> </div><div class="line"><span class="comment">//导入数据加密方法</span></div><div class="line"><span class="keyword">import</span> secretJS <span class="keyword">from</span> <span class="string">'./secret'</span>;</div><div class="line"> </div><div class="line"><span class="comment">//当前运行环境</span></div><div class="line"><span class="keyword">var</span> domain = <span class="string">'XXX'</span>;</div><div class="line"> </div><div class="line"><span class="comment">//封装ajax</span></div><div class="line"><span class="keyword">var</span> ajax = &#123;</div><div class="line">  <span class="comment">//通用的ajax-post</span></div><div class="line">  common:<span class="function"><span class="keyword">function</span>(<span class="params">url,data,sucFn,secret,errFn</span>)</span>&#123;</div><div class="line">    <span class="comment">//param说明</span></div><div class="line">    <span class="comment">//@url    ajax访问的url</span></div><div class="line">    <span class="comment">//@data    post发送的数据</span></div><div class="line">    <span class="comment">//@sucFn  ajax成功时运行函数</span></div><div class="line">    <span class="comment">//@errFn  ajax失败时运行函数(大部分为缺省，但例如登录出错时则需要)</span></div><div class="line"> </div><div class="line">    <span class="comment">//发送ajax</span></div><div class="line">    axios.post(domain + url , qs.stringify(secretJS.reData(data,secret)) ).then(</div><div class="line">      <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">        <span class="comment">//先判断appId是否已经过期</span></div><div class="line">        <span class="keyword">if</span>(response.data != <span class="string">'appId not exist'</span>)&#123;</div><div class="line">          <span class="comment">//解密数据</span></div><div class="line">          <span class="keyword">var</span> rs = <span class="built_in">JSON</span>.parse(secretJS.backSecret(response.data,secret));</div><div class="line">          <span class="comment">//如果</span></div><div class="line">          <span class="keyword">if</span>(rs.success == <span class="literal">true</span>)  sucFn(rs);</div><div class="line">          <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">if</span>(errFn === <span class="literal">undefined</span>)&#123;</div><div class="line">              <span class="comment">//(退出登录或私钥+ID丢失)后访问页面-提示过期</span></div><div class="line">              <span class="keyword">this</span>.$router.push(<span class="string">'/expired'</span>);</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">              errFn(rs);</div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">          <span class="comment">//否则跳转到温馨提示登录过期页面</span></div><div class="line">          <span class="keyword">this</span>.$router.push(<span class="string">'/login'</span>);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    )</div><div class="line">    <span class="comment">//ajax完成</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ajax;</div></pre></td></tr></table></figure></p>
+<p>可以完善的地方还有很多，欢迎拍砖~</p>
+
+			</div>
+			<div class="atricle-updown">
+				<p><span>«</span><a href='/public/2017/03/21/exit-the-login-flow-chart/'>没有退出接口的页面实现退出功能流程图</a></p>
+				<p><a href='/public/2017/03/06/manage-vue-global-components/'>如何更方便的管理vue全局组件</a><span>«</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="footer">
+	<div class="footer-warp">
+		<p class="links">
+			<a href="http://www.sina.com.cn/" target="_blank" class="sina">新浪</a>
+			<a href="https://github.com/" target="_blank" class="git">git</a>
+		</p>
+		<p class="copyright">Powered by hexo<br />© 2017  , Content By ziy All Rights Reserved.</p>
+	</div>
+</div>
+<div class="menu-side">
+	<div class="menu-btn"></div>
+	<dl>
+		<dt>MENU</dt>
+		<dd><a href="/public/">首页</a></dd>
+		<dd><a href="/public/archives">归档</a></dd>
+		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+	</dl>
+	<dl>
+		<dt>TAG ' s</dt>
+		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+	</dl>
+</div>
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/pages.js"></script>
+</body>
+</html>

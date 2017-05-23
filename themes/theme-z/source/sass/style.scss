@@ -1,0 +1,26 @@
+@charset "UTF-8";
+@import '_mixin.scss';
+
+//定义通用样式
+@import '_common.scss';
+//头
+@import '_header.scss';
+//尾
+@import '_footer.scss';
+
+//右侧通用
+@import '_main.scss';
+//列表
+@import '_list.scss';
+//分页
+@import '_paginator.scss';
+//内容
+@import '_detail.scss';
+
+//左侧菜单
+@import '_menu.scss';
+//左侧模拟滚动条
+@import '_scroll.scss';
+
+//媒体查询
+@import '_media.scss';

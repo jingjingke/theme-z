@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>CSS多行文本溢出显示省略号-hexo-blog</title>	
+<meta name="keywords" content="CSS多行文本溢出显示省略号,CSS" />
+<meta name="description" content="大部分童鞋都知道CSS单行文本溢出显示省略号的方法是text-overflow:ellipsis;，那么多行文本溢出显示省略号的方法是什么呢？了解一下吧~单行文本溢出利用CSS控制当单行文溢出时显示省略号，前提是元素需要是块元素。代码如下：overflow:hidden; white-space:nowrap; text-ove" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+</head>
+<body>
+<div class="container">
+<div class="main main-list">
+	<div class="main-warp">
+		<div class="main-list-site">
+			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/public/2016/05/12/css-lines-overflow-ellipses/">CSS多行文本溢出显示省略号</a></h1>
+		</div>
+		<div class="main-detail">
+			<div class="detail-tips">
+				<span class="time">2016/05/12</span>
+				<p class="tags">
+					<a href='/public/tags/CSS/'>CSS</a>
+				</p>
+			</div>
+			<div class="atricle-content">
+				<p>大部分童鞋都知道CSS单行文本溢出显示省略号的方法是text-overflow:ellipsis;，那么多行文本溢出显示省略号的方法是什么呢？了解一下吧~<img src="/public/img/1-1605121UGT35.jpg" alt="CSS多行文本溢出显示省略号配图"></p>
+<h2 id="单行文本溢出"><a href="#单行文本溢出" class="headerlink" title="单行文本溢出"></a>单行文本溢出</h2><p>利用CSS控制当单行文溢出时显示省略号，前提是元素需要是块元素。代码如下：<br><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">overflow</span><span class="selector-pseudo">:hidden</span>; <span class="selector-tag">white-space</span><span class="selector-pseudo">:nowrap</span>; <span class="selector-tag">text-overflow</span><span class="selector-pseudo">:ellipsis</span>;</div></pre></td></tr></table></figure></p>
+<p>如果元素为内联元素的话则需要转变为块元素：<br><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">overflow</span><span class="selector-pseudo">:hidden</span>; <span class="selector-tag">white-space</span><span class="selector-pseudo">:nowrap</span>; <span class="selector-tag">text-overflow</span><span class="selector-pseudo">:ellipsis</span>; <span class="selector-tag">display</span><span class="selector-pseudo">:block</span>;</div></pre></td></tr></table></figure></p>
+<p>可以说CSS单行文本溢出显示省略号可以满足我们大部的需求，比较广泛的就是在单行标题上的应用。</p>
+<h2 id="多行文本溢出"><a href="#多行文本溢出" class="headerlink" title="多行文本溢出"></a>多行文本溢出</h2><p>利用CSS控制多行文本溢出显示省略号相较于上者，因为使用了WebKit的CSS扩展属性，较上者（单行文本溢出使用的CSS3新属性）兼容性要差点，该方法适用于WebKit浏览器及移动端。具体代码如下：<br><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">display</span><span class="selector-pseudo">:-webkit-box</span>; <span class="selector-tag">overflow</span><span class="selector-pseudo">:hidden</span>; <span class="selector-tag">text-overflow</span><span class="selector-pseudo">:ellipsis</span>; <span class="selector-tag">-webkit-line-clamp</span><span class="selector-pseudo">:2</span>; <span class="selector-tag">-webkit-box-orient</span><span class="selector-pseudo">:vertical</span>;</div></pre></td></tr></table></figure></p>
+<p>这种方法无关乎元素为内联或块，不过为了让高度在各浏览器中显示差异的最小化，最好给元素添加高度和行高（高度是行高的整数倍，这个倍数值与设置的行数要一致），并且如果是内联元素则转变为块元素。<br><figure class="highlight css"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">display</span><span class="selector-pseudo">:block</span>; <span class="selector-tag">height</span><span class="selector-pseudo">:3em</span>; <span class="selector-tag">line-height</span><span class="selector-pseudo">:1.5em</span>;</div><div class="line"><span class="selector-tag">display</span><span class="selector-pseudo">:-webkit-box</span>; <span class="selector-tag">overflow</span><span class="selector-pseudo">:hidden</span>; <span class="selector-tag">text-overflow</span><span class="selector-pseudo">:ellipsis</span>; <span class="selector-tag">-webkit-line-clamp</span><span class="selector-pseudo">:2</span>; <span class="selector-tag">-webkit-box-orient</span><span class="selector-pseudo">:vertical</span>;</div></pre></td></tr></table></figure></p>
+<p>看一下各属性/值的意思：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">display:-webkit-box;     //必须结合的属性，将对象作为弹性伸缩盒子模型显示</div><div class="line">-webkit-line-clamp       //用来限制在一个块元素显示的文本的行数（为了实现该效果，它需要组合其他的WebKit属性</div><div class="line">-webkit-box-orient       //必须结合的属性，设置或检索伸缩盒对象的子元素的排列方式</div></pre></td></tr></table></figure></p>
+<p>更多关于用样式设置/JS设置多行溢出显示省略号的方案可以参考下面的链接：<a href="http://www.css88.com/archives/5206" target="_blank" rel="external">点击这里</a></p>
+
+			</div>
+			<div class="atricle-updown">
+				<p><span>«</span><a href='/public/2016/05/20/repaint-and-reflow/'>页面重构应注意的重绘和渲染</a></p>
+				<p><a href='/public/2016/03/23/ps-set-shortcuts/'>PS设置时间轴面板快捷键</a><span>«</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="footer">
+	<div class="footer-warp">
+		<p class="links">
+			<a href="http://www.sina.com.cn/" target="_blank" class="sina">新浪</a>
+			<a href="https://github.com/" target="_blank" class="git">git</a>
+		</p>
+		<p class="copyright">Powered by hexo<br />© 2017  , Content By ziy All Rights Reserved.</p>
+	</div>
+</div>
+<div class="menu-side">
+	<div class="menu-btn"></div>
+	<dl>
+		<dt>MENU</dt>
+		<dd><a href="/public/">首页</a></dd>
+		<dd><a href="/public/archives">归档</a></dd>
+		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+	</dl>
+	<dl>
+		<dt>TAG ' s</dt>
+		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+	</dl>
+</div>
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/pages.js"></script>
+</body>
+</html>

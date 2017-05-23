@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>安卓APP中可以调用JS方法-hexo-blog</title>	
+<meta name="keywords" content="安卓APP中可以调用JS方法,JS" />
+<meta name="description" content="通过JS可以在APP嵌套的页面中调用安卓自定义的方法，同理安卓也可以执行JS自定义的函数（方法）。这两天在调试嵌套在APP中的页面，学（zhe）习（mo）之后，感觉还是有点进步的，其中第一次接触到安卓执行页面中的JS，感觉这个用处满大的。JS调用安卓自定义的方法：android.funName()而安卓中也调用网页中的方法：Ca" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="/public/css/hl-github.css">
+<link rel="Shortcut Icon" href="/public/img/favicon.ico" type="image/ico">
+</head>
+<body>
+<div class="container">
+<div class="main main-list">
+	<div class="main-warp">
+		<div class="main-list-site">
+			<a href="/public/">首页</a><span>»</span><a href="/public/categories/前端笔记/">前端笔记</a><span>»</span>
+			<h1><a href="/public/2016/08/09/app-can-call-js-method/">安卓APP中可以调用JS方法</a></h1>
+		</div>
+		<div class="main-detail">
+			<div class="detail-tips">
+				<span class="time">2016/08/09</span>
+				<p class="tags">
+					<a href='/public/tags/JS/'>JS</a>
+				</p>
+			</div>
+			<div class="atricle-content">
+				<p>通过JS可以在APP嵌套的页面中调用安卓自定义的方法，同理安卓也可以执行JS自定义的函数（方法）。<img src="/public/img/1-16091013393b04.jpg" alt="安卓APP中可以调用JS方法配图">这两天在调试嵌套在APP中的页面，学（zhe）习（mo）之后，感觉还是有点进步的，其中第一次接触到安卓执行页面中的JS，感觉这个用处满大的。</p>
+<p>JS调用安卓自定义的方法：<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line">android.funName()</div></pre></td></tr></table></figure></p>
+<p>而安卓中也调用网页中的方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">Callfunction()&#123;</div><div class="line">    webview.loadUrl(<span class="string">"javascript: funName(这里也可以传参)"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这次项目主要针对安卓4.4.4版本input调不到图片而无法正常显示图片缩略图的BUG，通过安卓本身将选择的图片上传服务器，当图片上传成功后执行JS自定义的函数并返回url值给我来生成缩略图。</p>
+<p>简写了一个比较简单的过程，这样比较好理解</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">//安卓开发人员写的代码：</span></div><div class="line">Callfunction()&#123;</div><div class="line">  webview.loadUrl(<span class="string">"javascript: getAndroidImg(上传成功后获取到的地址)"</span>);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">//前端写的代码：</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAndroidImg</span>(<span class="params">imgUrl</span>)</span>&#123;</div><div class="line">  $(<span class="string">'#otherUpload'</span>).prepend(<span class="string">'&lt;img src="'</span> + imgUrl + <span class="string">'"&gt;'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+			</div>
+			<div class="atricle-updown">
+				<p><span>«</span><a href='/public/2016/08/30/background-position-percentage/'>background-position百分比格子速记法</a></p>
+				<p><a href='/public/2016/05/20/repaint-and-reflow/'>页面重构应注意的重绘和渲染</a><span>«</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="footer">
+	<div class="footer-warp">
+		<p class="links">
+			<a href="http://www.sina.com.cn/" target="_blank" class="sina">新浪</a>
+			<a href="https://github.com/" target="_blank" class="git">git</a>
+		</p>
+		<p class="copyright">Powered by hexo<br />© 2017  , Content By ziy All Rights Reserved.</p>
+	</div>
+</div>
+<div class="menu-side">
+	<div class="menu-btn"></div>
+	<dl>
+		<dt>MENU</dt>
+		<dd><a href="/public/">首页</a></dd>
+		<dd><a href="/public/archives">归档</a></dd>
+		<dd><a href='/public/categories/前端笔记/'>前端笔记</a></dd>
+	</dl>
+	<dl>
+		<dt>TAG ' s</dt>
+		<dd><a href="/public/tags/JS/">JS</a></a><span>3</span></dd>
+		<dd><a href="/public/tags/CSS/">CSS</a></a><span>4</span></dd>
+		<dd><a href="/public/tags/逻辑/">逻辑</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/VUE/">VUE</a></a><span>2</span></dd>
+		<dd><a href="/public/tags/PS/">PS</a></a><span>1</span></dd>
+		<dd><a href="/public/tags/性能/">性能</a></a><span>1</span></dd>
+	</dl>
+</div>
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/pages.js"></script>
+</body>
+</html>
